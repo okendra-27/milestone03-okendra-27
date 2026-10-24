@@ -1,44 +1,60 @@
-cmake_minimum_required(VERSION 3.6)
-project(ai_workspace_m3 LANGUAGES CXX)
+# Created by and for Qt Creator This file was created for editing the project sources only.
+# You may attempt to use it for building too, by modifying this file here.
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
+cmake_minimum_required(VERSION 3.5)
+project(Milestone03)
 
-# M3 is cumulative. Copy your completed M2 implementation files into src/
-# using the filenames below before configuring/building this project.
-add_library(aiws_m2
-    src/document.cpp
-    src/workspace.cpp
-    src/text_processor.cpp
-    src/chunker.cpp
-    src/corpus_index.cpp
-    src/retrieval_engine.cpp
-    src/context_builder.cpp
-    src/processing_core.cpp
-)
-target_include_directories(aiws_m2 PUBLIC include)
-target_compile_options(aiws_m2 PRIVATE -Wall -Wextra -Wpedantic)
-
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
+set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+find_package(Qt5 COMPONENTS Core Gui Widgets REQUIRED)
 
-add_executable(ai_workspace_m3
-    src/main.cpp
-    src/main_window.cpp
-    src/workspace_widget.cpp
-    src/search_widget.cpp
-    src/context_widget.cpp
-    src/term_inspector_widget.cpp
-    src/search_result_model.cpp
+
+
+set (SRCS
+    data/public/doc_ai.txt
+    data/public/doc_retrieval.txt
+    data/public/doc_systems.txt
+    data/public/queries.txt
+    include/aiws/gui/context_widget.hpp
     include/aiws/gui/main_window.hpp
     include/aiws/gui/resettable.hpp
-    include/aiws/gui/workspace_widget.hpp
-    include/aiws/gui/search_widget.hpp
-    include/aiws/gui/context_widget.hpp
-    include/aiws/gui/term_inspector_widget.hpp
     include/aiws/gui/search_result_model.hpp
+    include/aiws/gui/search_widget.hpp
+    include/aiws/gui/term_inspector_widget.hpp
+    include/aiws/gui/workspace_widget.hpp
+    include/aiws/chunker.hpp
+    include/aiws/chunking_strategy.hpp
+    include/aiws/context_builder.hpp
+    include/aiws/context_strategy.hpp
+    include/aiws/corpus_index.hpp
+    include/aiws/document.hpp
+    include/aiws/processing_core.hpp
+    include/aiws/processing_types.hpp
+    include/aiws/retrieval_engine.hpp
+    include/aiws/retrieval_strategy.hpp
+    include/aiws/text_processor.hpp
+    include/aiws/workspace.hpp
+    src/context_widget.cpp
+    src/document.cpp
+    src/main.cpp
+    src/main_window.cpp
+    src/search_result_model.cpp
+    src/search_widget.cpp
+    src/term_inspector_widget.cpp
+    src/workspace.cpp
+    src/workspace_widget.cpp
+    chunker.cpp
+    context_builder.cpp
+    corpus_index.cpp
+    processing_core.cpp
+    retrieval_engine.cpp
+    text_processor.cpp
 )
-target_include_directories(ai_workspace_m3 PRIVATE include)
-target_link_libraries(ai_workspace_m3 PRIVATE aiws_m2 Qt6::Widgets)
-target_compile_options(ai_workspace_m3 PRIVATE -Wall -Wextra -Wpedantic)
+
+
+add_executable(${CMAKE_PROJECT_NAME} ${SRCS})
+
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Qt5::Core Qt5::Gui Qt5::Widgets)
