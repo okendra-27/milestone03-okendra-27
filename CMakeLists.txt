@@ -1,23 +1,20 @@
 # Created by and for Qt Creator This file was created for editing the project sources only.
 # You may attempt to use it for building too, by modifying this file here.
 
-cmake_minimum_required(VERSION 3.5)
-project(Milestone03)
+cmake_minimum_required(VERSION 3.16)
+project(Milestone3 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-find_package(Qt5 COMPONENTS Core Gui Widgets REQUIRED)
+set(CMAKE_PREFIX_PATH "C:/Qt/6.11.2/mingw_64")
+find_package(Qt6 COMPONENTS Core Gui Widgets REQUIRED)
 
 
 
 set (SRCS
-    data/public/doc_ai.txt
-    data/public/doc_retrieval.txt
-    data/public/doc_systems.txt
-    data/public/queries.txt
     include/aiws/gui/context_widget.hpp
     include/aiws/gui/main_window.hpp
     include/aiws/gui/resettable.hpp
@@ -37,24 +34,29 @@ set (SRCS
     include/aiws/retrieval_strategy.hpp
     include/aiws/text_processor.hpp
     include/aiws/workspace.hpp
+    src/chunker.cpp
+    src/context_builder.cpp
     src/context_widget.cpp
+    src/corpus_index.cpp
     src/document.cpp
     src/main.cpp
     src/main_window.cpp
+    src/processing_core.cpp
+    src/retrieval_engine.cpp
     src/search_result_model.cpp
     src/search_widget.cpp
     src/term_inspector_widget.cpp
+    src/text_processor.cpp
     src/workspace.cpp
     src/workspace_widget.cpp
-    chunker.cpp
-    context_builder.cpp
-    corpus_index.cpp
-    processing_core.cpp
-    retrieval_engine.cpp
-    text_processor.cpp
 )
 
 
 add_executable(${CMAKE_PROJECT_NAME} ${SRCS})
 
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Qt5::Core Qt5::Gui Qt5::Widgets)
+target_include_directories(${CMAKE_PROJECT_NAME}
+    PRIVATE
+        include
+)
+
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets)
